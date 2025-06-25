@@ -1,12 +1,31 @@
 
-import random
+
+import requests
+
+from thor.server import THOR_PORT
+
+
+def do_thor_health_check():
+    res = requests.get(f"http://localhost:{THOR_PORT}/health")
+    if res.status_code == 200:
+        print("Loki is healthy.")
+    else:
+        print("Loki health check failed.")
 
 
 def run_test_case(test_case_id):
     print(f"Running test case: {test_case_id}")
-    # Simulate running a test case
-    result = f"Result of {test_case_id}: {random.randint(1, 100)}"
-    return result
+
+    # Run test case on Loki
+    result = requests.post(
+        f"http://localhost:{THOR_PORT}/run_test_case",
+        json={"test_case_id": test_case_id})
+    if result.status_code != 200:
+        print(f"Failed to run test case: {test_case_id}")
+        return None
+    print(f"Test case {test_case_id} executed successfully.")
+    value = result.json().get("result", "No result found")
+    return value
 
 
 if __name__ == "__main__":
