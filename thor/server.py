@@ -1,4 +1,7 @@
+# RUN test cases on simulator
+
 # Flask app for running the Thor server
+
 import random
 from flask import Flask, jsonify, request
 
