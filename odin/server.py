@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, PlainTextResponse
 import random
 
-ODIN_PORT = 6000
+ODIN_PORT = 4000
 
 app = FastAPI()
 
