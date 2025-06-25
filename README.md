@@ -2,14 +2,25 @@
 
 Monorepo for code of master my master thesis.
 
-## Thor
+## Dependencies
+
+TODO: Write requirements.txt file
+
+- FastAPI
+  - `pip install fastapi`
+  - `pip install "fastapi[standard]`
+- Carla
+
+## Components
+
+### Thor
 
 Running test cases
 
-## Odin
+### Odin
 
 Performing LLM enhancement
 
-## Loki
+### Loki
 
 Frontend/interaction

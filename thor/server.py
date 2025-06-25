@@ -1,8 +1,9 @@
 # RUN test cases on simulator
 
-# Flask app for running the Thor server
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, PlainTextResponse
+
+from thor.carla_interface import get_carla_is_up
 
 THOR_PORT = 5000
 
@@ -27,3 +28,12 @@ async def run_test_case(request: Request):
     # Simulate test case execution
     result = f"Result for {test_case_id}"
     return {"result": result}
+
+
+@app.get("/carla_is_up")
+async def carla_is_up() -> JSONResponse:
+    """
+    Check if the CARLA simulator is up and running.
+    This function attempts t
+    """
+    return get_carla_is_up()
