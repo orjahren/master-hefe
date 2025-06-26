@@ -2,6 +2,7 @@
 services:
   thor:
     image: thor:latest
+    build: ./thor
     container_name: thor
     ports:
       - "5000:5000"
@@ -13,6 +14,7 @@ services:
 
   odin:
     image: odin:latest
+    build: ./odin
     container_name: odin
     ports:
       - "4000:4000"
