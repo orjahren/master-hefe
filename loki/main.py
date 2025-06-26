@@ -17,7 +17,13 @@ def do_thor_health_check():
         print("Thor server is not running or unreachable.")
         exit(1)
     if res.status_code == 200:
-        print("Thor is healthy.")
+        # parse json
+        health_status = res.json().get("status", "unknown")
+        if health_status == "healthy":
+            print("Thor is healthy.")
+        else:
+            print(f"Thor health check failed.: {health_status}")
+            exit(1)
     else:
         print("Thor health check failed.")
         exit(1)
@@ -30,7 +36,12 @@ def do_odin_health_check():
         print("Odin server is not running or unreachable.")
         exit(1)
     if res.status_code == 200:
-        print("Odin is healthy.")
+        health_status = res.json().get("status", "unknown")
+        if health_status == "healthy":
+            print("Odin is healthy.")
+        else:
+            print(f"Odin health check failed.: {health_status}")
+            exit(1)
     else:
         print("Odin health check failed.")
         exit(1)
