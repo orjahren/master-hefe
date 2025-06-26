@@ -2,6 +2,10 @@
 
 Monorepo for code of master my master thesis.
 
+## Running
+
+`podman-compose up`
+
 ## Dependencies
 
 TODO: Write requirements.txt file
