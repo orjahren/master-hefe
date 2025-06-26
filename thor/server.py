@@ -3,7 +3,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, PlainTextResponse
 
-from thor.carla_interface import get_carla_is_up
+from carla_interface import get_carla_is_up
 
 THOR_PORT = 5000
 
