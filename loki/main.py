@@ -2,8 +2,11 @@
 
 import requests
 
-from odin.server import ODIN_PORT
-from thor.server import THOR_PORT
+# from odin.server import ODIN_PORT
+# from thor.server import THOR_PORT
+
+ODIN_PORT = 4000
+THOR_PORT = 5000
 
 
 # TODO: Merge health checks into a single function?
