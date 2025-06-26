@@ -9,6 +9,7 @@ def get_carla_is_up() -> bool:
     Check if the CARLA simulator is up and running.
     This function attempts to connect to the CARLA server and returns True if successful, otherwise False.
     """
+    print("Running carla integration check to see if it is up...")
     try:
         client = carla.Client(CARLA_HOST, CARLA_PORT)
         client.get_world()

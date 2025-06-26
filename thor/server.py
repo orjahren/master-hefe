@@ -17,7 +17,7 @@ async def read_root() -> str:
 
 @app.get('/health')
 async def health_check():
-    return {"status": "healthy"}
+    return {"status": "healthy" if get_carla_is_up() else "unhealthy"}
 
 
 @app.post('/run_test_case')
@@ -36,7 +36,7 @@ async def carla_is_up() -> JSONResponse:
     Check if the CARLA simulator is up and running.
     This function attempts to connect to the CARLA server and returns True if successful, otherwise False.
     """
-    print("Checking if CARLA is up...")
+    print("Hitting endpoint for checking if CARLA is up...")
     res = get_carla_is_up()
     if res:
         print("CARLA is up and running.")
