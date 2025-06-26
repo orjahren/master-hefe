@@ -11,7 +11,7 @@ app = FastAPI()
 
 @app.get("/", response_class=PlainTextResponse)
 async def read_root() -> str:
-    return "Hello, World!"
+    return "Hello from Odin!"
 
 
 @app.get('/health')
