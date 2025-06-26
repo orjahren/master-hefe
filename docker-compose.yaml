@@ -4,8 +4,7 @@ services:
     image: thor:latest
     build: ./thor
     container_name: thor
-    ports:
-      - "5000:5000"
+    network_mode: host
     environment:
       - THOR_ENV=production
       - THOR_PORT=5000
@@ -16,8 +15,7 @@ services:
     image: odin:latest
     build: ./odin
     container_name: odin
-    ports:
-      - "4000:4000"
+    network_mode: host
     environment:
       - ODIN_ENV=production
       - ODIN_PORT=4000

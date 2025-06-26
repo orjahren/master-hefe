@@ -34,6 +34,13 @@ async def run_test_case(request: Request):
 async def carla_is_up() -> JSONResponse:
     """
     Check if the CARLA simulator is up and running.
-    This function attempts t
+    This function attempts to connect to the CARLA server and returns True if successful, otherwise False.
     """
-    return get_carla_is_up()
+    print("Checking if CARLA is up...")
+    res = get_carla_is_up()
+    if res:
+        print("CARLA is up and running.")
+        return JSONResponse(content={"carla_is_up": True})
+    else:
+        print("CARLA is not reachable.")
+        return JSONResponse(content={"carla_is_up": False}, status_code=503)
