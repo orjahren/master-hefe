@@ -1,5 +1,4 @@
-
-
+import pika
 import requests
 
 # from odin.server import ODIN_PORT
@@ -83,12 +82,27 @@ def get_improvement(base_test_case, enhanced_test_case):
     return f"Improvement from {base_test_case} to {enhanced_test_case}"
 
 
+def send_test_message(message):
+    # TODO: Implement proper credentail handling.
+    credentials = pika.PlainCredentials('user', 'pass')
+    connection = pika.BlockingConnection(
+        pika.ConnectionParameters('localhost', credentials=credentials))
+    channel = connection.channel()
+    channel.queue_declare(queue='test_queue')
+    channel.basic_publish(exchange='', routing_key='test_queue', body=message)
+    print(f"Sent message to RabbitMQ: {message}")
+    connection.close()
+
+
 if __name__ == "__main__":
     print("Loki is running...")
 
     do_thor_health_check()
     do_odin_health_check()
 
+    send_test_message("Hello from Loki!")
+
+    exit(0)
     test_case_id = "test_case_123"
 
     print("Starting test case execution...")

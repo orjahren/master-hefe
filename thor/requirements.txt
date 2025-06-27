@@ -1,3 +1,5 @@
 fastapi
 fastapi[standard]
 carla
+pika
+uvicorn

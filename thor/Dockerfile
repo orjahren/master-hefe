@@ -30,4 +30,5 @@ RUN ls
 RUN ls /app
 # Set the entrypoint to run the application
 # It is a fastapi application
-CMD ["fastapi", "dev", "server.py", "--host", "0.0.0.0", "--port", "5000"]
+#CMD ["fastapi", "dev", "server.py", "--host", "0.0.0.0", "--port", "5000"]
+CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "5000", "--workers", "1"]   

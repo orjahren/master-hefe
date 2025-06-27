@@ -21,3 +21,16 @@ services:
       - ODIN_PORT=4000
     volumes:
       - ./odin_data:/data/odin
+
+  rabbit:
+    image: rabbitmq:latest
+    network_mode: host
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=pass
+    volumes:
+      - rabbit_data:/var/lib/rabbitmq
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+
+volumes:
+  rabbit_data:
