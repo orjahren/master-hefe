@@ -4,7 +4,7 @@ Monorepo for code of [my master thesis](https://github.com/orjahren/master).
 
 ## Running
 
-`podman-compose up`
+`make`
 
 `sh loki/liveness.sh`
 
@@ -23,7 +23,9 @@ til å RMe ting
 TODO: Write requirements.txt file
 
 - Standard UNIX utils
-  - Curl
+  - `curl`
+  - `jq`
+  - `make`
 - Podman (or Docker, YMMW)
   - Podman-compose
 - Python 3.13 (for running the [loki module](./loki/))
