@@ -1,6 +1,6 @@
 # master-hefe
 
-Monorepo for code of master my master thesis.
+Monorepo for code of [my master thesis](https://github.com/orjahren/master).
 
 ## Running
 
