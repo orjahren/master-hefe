@@ -1,5 +1,6 @@
 # RUN test cases on simulator
 
+from fastapi import Request
 from contextlib import asynccontextmanager
 import pika
 import threading
@@ -107,6 +108,9 @@ async def test_carla() -> JSONResponse:
 
 
 @app.post("/test_rabbit")
-async def test_rabbit() -> JSONResponse:
-    print("Hitting endpoint for RabbitMQ tester...")
-    return JSONResponse(content={"status": "RabbitMQ test endpoint is up"})
+async def test_rabbit(request: Request) -> JSONResponse:
+    data = await request.json()
+    message = data.get("message", "")
+    print(
+        f"Hitting endpoint for RabbitMQ tester... Received message: {message}")
+    return JSONResponse(content={"status": "RabbitMQ test endpoint is up", "received_message": message})
