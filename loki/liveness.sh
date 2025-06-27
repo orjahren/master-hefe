@@ -1,17 +1,24 @@
 
-echo "Thor:"
-curl http://localhost:5000/health
+thor=$(curl -s http://localhost:5000/health | jq '.status')
 if [ $? -ne 0 ]; then
   exit 1
 fi
-echo  ""
+if [ "$thor" != "\"healthy\"" ]; then
+  echo "Thor is not operational."
+  exit 1
+fi
 
-echo "Odin:"
-curl http://localhost:4000/health
+echo "Thor: OK"
+
+odin=$(curl -s http://localhost:4000/health | jq '.status')
 if [ $? -ne 0 ]; then
   exit 1
 fi
-echo  ""
+if [ "$odin" != "\"healthy\"" ]; then
+  echo "Odin is not operational."
+  exit 1
+fi
+echo "Odin: OK"
 
 echo "Hefe is operational."
 exit 0
