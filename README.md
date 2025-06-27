@@ -6,6 +6,11 @@ Monorepo for code of [my master thesis](https://github.com/orjahren/master).
 
 `podman-compose up`
 
+NOTE: Hvis man ikke remover kan man ende opp med å kjøre gamle containers selv
+om nye images har blitt bygget
+
+` podman rm odin thor && podman-compose up`
+
 ## Dependencies
 
 TODO: Write requirements.txt file

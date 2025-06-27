@@ -3,7 +3,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, PlainTextResponse
 
-from carla_interface import get_carla_is_up
+from carla_interface import get_carla_is_up, test_spawn_some_vehicles
 
 THOR_PORT = 5000
 
@@ -44,3 +44,10 @@ async def carla_is_up() -> JSONResponse:
     else:
         print("CARLA is not reachable.")
         return JSONResponse(content={"carla_is_up": False}, status_code=503)
+
+
+@app.get("/test_carla")
+async def test_carla() -> JSONResponse:
+    print("Hitting endpoint for testing CARLA functionality...")
+    result = test_spawn_some_vehicles()
+    return JSONResponse(content={"test_spawn_some_vehicles": result})
