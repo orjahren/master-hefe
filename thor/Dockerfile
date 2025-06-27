@@ -10,6 +10,7 @@ RUN apt-get update && \
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+
 # Create a virtual environment
 RUN python3 -m venv /opt/venv
 # activate the virtual environment
@@ -22,13 +23,13 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 # Copy the application code
 COPY . /app
+# Make the wait-for-it script executable
+RUN chmod +x wait-for-it.sh
 # Expose the port the app runs on
 EXPOSE 5000
 ENV PYTHONPATH=/app
 RUN pwd
 RUN ls
 RUN ls /app
-# Set the entrypoint to run the application
-# It is a fastapi application
-#CMD ["fastapi", "dev", "server.py", "--host", "0.0.0.0", "--port", "5000"]
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "5000", "--workers", "1"]   
+# NOTE: wait-for-it.sh is used to wait for RabbitMQ to be ready so we don't have to wait for it in the code
+CMD ["./wait-for-it.sh", "localhost:5672", "--", "uvicorn", "server:app", "--host", "0.0.0.0", "--port", "5000", "--workers", "1"]
