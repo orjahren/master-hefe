@@ -3,6 +3,7 @@ services:
   thor:
     image: thor:latest
     build: ./thor
+    platform: linux/amd64
     container_name: thor
     network_mode: host
     environment:
@@ -14,6 +15,7 @@ services:
   odin:
     image: odin:latest
     build: ./odin
+    platform: linux/amd64
     container_name: odin
     network_mode: host
     environment:
@@ -24,6 +26,7 @@ services:
 
   rabbit:
     image: rabbitmq:latest
+    platform: linux/amd64
     network_mode: host
     environment:
       - RABBITMQ_DEFAULT_USER=user
