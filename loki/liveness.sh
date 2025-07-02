@@ -1,5 +1,5 @@
 
-thor=$(curl -s http://localhost:5000/health | jq '.status')
+thor=$(curl -s http://localhost:6000/health | jq '.status')
 if [ $? -ne 0 ]; then
   exit 1
 fi

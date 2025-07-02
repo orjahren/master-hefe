@@ -9,7 +9,7 @@ from fastapi.responses import JSONResponse, PlainTextResponse
 
 from carla_interface import get_carla_is_up, test_spawn_some_vehicles
 
-THOR_PORT = 5000
+THOR_PORT = 6000
 
 
 def rabbitmq_listener():
@@ -22,7 +22,7 @@ def rabbitmq_listener():
     print(
         f"Connecting to RabbitMQ with credentials...")
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters('localhost', credentials=credentials)
+        pika.ConnectionParameters('rabbit', credentials=credentials)
     )
     print("Connected to RabbitMQ server.")
     channel = connection.channel()
