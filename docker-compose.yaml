@@ -3,7 +3,8 @@ services:
   thor:
     image: thor:latest
     build: ./thor
-    platform: linux
+    platform: linux/amd64
+    # Use platform linux/amd64 for compatibility with MacOS
     container_name: thor
     network_mode: host
     environment:
