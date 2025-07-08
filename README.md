@@ -13,8 +13,6 @@ Monorepo for code of [my master thesis](https://github.com/orjahren/master).
 NOTE: Hvis man ikke remover kan man ende opp med å kjøre gamle containers selv
 om nye images har blitt bygget
 
-` podman rm odin thor && podman-compose up`
-
 Bedre å bruke `podman-compose down`? Litt usikker på hva den gjør men den ser ut
 til å RMe ting
 
@@ -26,8 +24,7 @@ TODO: Write requirements.txt file
   - `curl`
   - `jq`
   - `make`
-- Podman (or Docker, YMMW)
-  - Podman-compose
+- Docker
 - Python 3.13 (for running the [loki module](./loki/))
   - requests
   - pika
