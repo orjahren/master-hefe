@@ -12,6 +12,8 @@ services:
       - THOR_PORT=6000
     volumes:
       - ./thor_data:/data/thor
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   odin:
     image: odin:latest
