@@ -4,17 +4,10 @@ Monorepo for code of [my master thesis](https://github.com/orjahren/master).
 
 ## Running
 
-`make`
-
-`sh loki/liveness.sh`
-
----
-
-NOTE: Hvis man ikke remover kan man ende opp med å kjøre gamle containers selv
-om nye images har blitt bygget
-
-Bedre å bruke `podman-compose down`? Litt usikker på hva den gjør men den ser ut
-til å RMe ting
+1. `make`
+1. Start Carla on your host machine
+   1. Expects RPC on port 2000
+1. `sh loki/liveness.sh`
 
 ## Dependencies
 
