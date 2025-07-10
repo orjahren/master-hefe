@@ -42,5 +42,30 @@ services:
       - rabbit_data:/var/lib/rabbitmq
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
 
+  carla:
+    image: carlasim/carla:0.9.15
+    platform: linux
+    container_name: carla
+    ports:
+      - "2000:2000"
+    environment:
+      - CARLA_ENV=production
+      - CARLA_PORT=2000
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - XDG_RUNTIME_DIR=/tmp/runtime
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    volumes:
+      - ./carla_data:/data/carla
+    command: >
+      ./CarlaUE4.sh -ResX=800 -ResY=600 -nullrhi -prefernvidia -RenderOffScreen
+
 volumes:
   rabbit_data:
+  carla_data:

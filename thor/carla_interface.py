@@ -1,6 +1,6 @@
 import carla
 
-CARLA_HOST = "host.docker.internal"
+CARLA_HOST = "carla"
 CARLA_PORT = 2000
 
 
