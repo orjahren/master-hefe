@@ -74,3 +74,11 @@ def test_spawn_some_vehicles():
     assert len(vehicles) == 2
     assert get_vehicle_location(vehicles[0]) == locations[0]
     assert get_vehicle_location(vehicles[1]) == locations[1]
+
+
+if __name__ == "__main__":
+    if get_carla_is_up():
+        print("CARLA is up and running.")
+        # test_spawn_some_vehicles()
+    else:
+        print("CARLA is not reachable.")

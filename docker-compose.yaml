@@ -71,7 +71,7 @@ services:
       - /etc/timezone:/etc/timezone
       - /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d
     command: >
-      ./CarlaUE4.sh -quality-level=Low -carla-rpc-port=2000
+      ./CarlaUE4.sh -quality-level=epic -carla-rpc-port=2000 -nosound
 
 volumes:
   rabbit_data:
