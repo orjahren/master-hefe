@@ -194,4 +194,4 @@ cython_debug/
 .cursorindexingignore
 
 carla-venv
-cr-venv
+cr*-venv
