@@ -76,6 +76,18 @@ def test_spawn_some_vehicles():
     assert get_vehicle_location(vehicles[1]) == locations[1]
 
 
+def set_map(map_name: str):
+    """
+    Set the CARLA world to a specific map.
+
+    :param map_name: The name of the map to set (e.g., 'Town01').
+    """
+    client = carla.Client(CARLA_HOST, CARLA_PORT)
+    world = client.get_world()
+    world = client.load_world(map_name)
+    return world
+
+
 if __name__ == "__main__":
     if get_carla_is_up():
         print("CARLA is up and running.")

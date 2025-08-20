@@ -9,6 +9,9 @@ Monorepo for code of [my master thesis](https://github.com/orjahren/master).
    1. Expects RPC on port 2000
 1. `sh loki/liveness.sh`
 
+NOTE: Noen ganger TM må man gjøre `xhost +local:docker` før `docker compose up`
+for at Carla-containeren skal starte riktig
+
 ## Dependencies
 
 TODO: Write requirements.txt file

@@ -7,7 +7,7 @@ import threading
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, PlainTextResponse
 
-from carla_interface import get_carla_is_up, test_spawn_some_vehicles
+from carla_interface import get_carla_is_up, set_map, test_spawn_some_vehicles
 
 THOR_PORT = 6000
 
@@ -97,3 +97,16 @@ async def test_rabbit(request: Request) -> JSONResponse:
     print(
         f"Hitting endpoint for RabbitMQ tester... Received message: {message}")
     return JSONResponse(content={"status": "RabbitMQ test endpoint is up", "received_message": message})
+
+
+@app.post("/set_map")
+async def set_map_endpoint(request: Request) -> JSONResponse:
+    data = await request.json()
+    map_name = data.get("map_name", "Town01")
+    print(f"Setting CARLA map to: {map_name}")
+    try:
+        world = set_map(map_name)
+        return JSONResponse(content={"status": "success", "map_name": map_name})
+    except Exception as e:
+        print(f"Error setting CARLA map: {e}")
+        return JSONResponse(content={"status": "error", "message": str(e)}, status_code=500)
