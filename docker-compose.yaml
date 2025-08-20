@@ -49,6 +49,10 @@ services:
     container_name: carla
     ports:
       - "2000:2000"
+      - "2001:2001"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
     environment:
       - CARLA_ENV=production
       - CARLA_PORT=2000
