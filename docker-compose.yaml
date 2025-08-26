@@ -70,7 +70,7 @@ services:
               capabilities: [gpu, compute, utility, graphics, display]
     volumes:
       - ./carla_data:/data/carla
-      - ${SCENARIO_RUNNER_ROOT}/logs:/logs
+      - /logs:/logs
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - /etc/localtime:/etc/localtime
       - /etc/timezone:/etc/timezone
