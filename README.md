@@ -25,6 +25,12 @@ TODO: Write requirements.txt file
   - requests
   - pika
 
+### Env vars
+
+- `HEFE_ROOT` - path to this folder
+- `CARLA_ROOT` - path to local Carla installation
+- `SCENARIO_RUNNER_ROOT` - path to local Carla scenario runner
+
 ## Components
 
 ### Thor
@@ -38,9 +44,3 @@ Performing LLM enhancement
 ### Loki
 
 Frontend/interaction
-
-### Env vars
-
-- `HEFE_ROOT` - path to this folder
-- `CARLA_ROOT` - path to local Carla installation
-- `SCENARIO_RUNNER_ROOT` - path to local Carla scenario runner
