@@ -24,12 +24,15 @@ TODO: Write requirements.txt file
 - Python 3.13 (for running the [loki module](./loki/))
   - requests
   - pika
+- Ollama
+    - `odin` assumes Ollama (with e.g. `mistral:latest`)  to be available on localhost
 
 ### Env vars
 
 - `HEFE_ROOT` - path to this folder
 - `CARLA_ROOT` - path to local Carla installation
 - `SCENARIO_RUNNER_ROOT` - path to local Carla scenario runner
+- `GEMINI_API_KEY` - Your Gemini API key (used by the `Odin` module) 
 
 ## Components
 
