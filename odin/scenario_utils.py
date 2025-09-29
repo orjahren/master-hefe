@@ -60,8 +60,7 @@ def get_enhanced_scenario_name(scenario_repository_path: str, scenario_name: str
         return f"{scenario_name}-enhanced"
     else:
         # Big brain time...who needs UUIDs when you can just count files?
-        # Note that we start counting from 1, not 0, which is why we don't do +1 here
-        return f"{scenario_name}-enhanced-{num_enhanced_scenarios}"
+        return f"{scenario_name}-enhanced-{num_enhanced_scenarios + 1}"
 
 
 def get_available_scenarios(scenario_repository_path: str) -> list:
