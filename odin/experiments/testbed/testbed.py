@@ -18,13 +18,12 @@ def model_name_to_function(model_name: str):
         raise ValueError(f"Model {model_name} is not supported.")
 
 
-def enhance_scenario_with_llm(scenario_description: str, model_name: str) -> str:
+def enhance_scenario_with_llm(scenario_description: str, model_name: str, prompt_name: str) -> str:
     if use_ollama and not api_is_up():
         raise ConnectionError("OLLAMA API is not reachable.")
 
     prompt = get_prompt_for_python_scenario_enhancement(
-        # scenario_description, "cot_strict_carla_api")
-        scenario_description, "minimal_changes")
+        scenario_description, prompt_name)
 
     print("Prompt to be sent to the model:")
     print(prompt[:100])
@@ -74,9 +73,13 @@ if __name__ == "__main__":
     print("Original scenario description:")
     print(scenario_description[:100])
 
+    prompt_name = "cot_strict_carla_api"
+    prompt_name = "minimal_changes"
+    model_name = "gemini-2.5-flash"
+
     enhanced_scenario = enhance_scenario_with_llm(
-        # scenario_description, model_name="mistral:latest")
-        scenario_description, model_name="gemini-2.5-flash")
+        scenario_description, model_name, prompt_name)
+
     output_path = SCENARIO_REPOSITORY_PATH + "/" + get_enhanced_scenario_name(
         SCENARIO_REPOSITORY_PATH, scenario.replace(".py", "")) + ".py"
     print(f"Saving enhanced scenario to: {output_path}")
