@@ -23,7 +23,8 @@ def enhance_scenario_with_llm(scenario_description: str, model_name: str) -> str
         raise ConnectionError("OLLAMA API is not reachable.")
 
     prompt = get_prompt_for_python_scenario_enhancement(
-        scenario_description, "cot_strict_carla_api")
+        # scenario_description, "cot_strict_carla_api")
+        scenario_description, "minimal_changes")
 
     print("Prompt to be sent to the model:")
     print(prompt[:100])
@@ -65,7 +66,9 @@ if __name__ == "__main__":
 
     ###
 
-    scenario = "cut_in.py"
+    # scenario = "cut_in.py"
+    # scenario = "junction.py"
+    scenario = "follow.py"
     scenario_path = os.path.join(SCENARIO_REPOSITORY_PATH, scenario)
     scenario_description = scenario_path_to_string(scenario_path)
     print("Original scenario description:")
