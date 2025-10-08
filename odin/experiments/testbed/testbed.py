@@ -18,12 +18,12 @@ def model_name_to_function(model_name: str):
         raise ValueError(f"Model {model_name} is not supported.")
 
 
-def enhance_scenario_with_llm(scenario_description: str, model_name: str, prompt_name: str) -> str:
+def enhance_scenario_with_llm(scenario_description: str, model_name: str, prompt_name: str, scenario_name: str) -> str:
     if use_ollama and not api_is_up():
         raise ConnectionError("OLLAMA API is not reachable.")
 
     prompt = get_prompt_for_python_scenario_enhancement(
-        scenario_description, prompt_name)
+        scenario_description, prompt_name, scenario_name)
 
     print("Prompt to be sent to the model:")
     print(prompt[:100])
@@ -67,18 +67,20 @@ if __name__ == "__main__":
 
     # scenario = "cut_in.py"
     # scenario = "junction.py"
-    scenario = "follow.py"
+    # scenario = "follow.py"
+    scenario = "route_obstacles.py"
     scenario_path = os.path.join(SCENARIO_REPOSITORY_PATH, scenario)
     scenario_description = scenario_path_to_string(scenario_path)
     print("Original scenario description:")
     print(scenario_description[:100])
 
     prompt_name = "cot_strict_carla_api"
-    prompt_name = "minimal_changes"
+    prompt_name = "minimal_changes_shared_file"
     model_name = "gemini-2.5-flash"
+    scenario_name = "Accident"
 
     enhanced_scenario = enhance_scenario_with_llm(
-        scenario_description, model_name, prompt_name)
+        scenario_description, model_name, prompt_name, scenario_name)
 
     output_path = SCENARIO_REPOSITORY_PATH + "/" + get_enhanced_scenario_name(
         SCENARIO_REPOSITORY_PATH, scenario.replace(".py", "")) + ".py"
