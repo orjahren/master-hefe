@@ -27,7 +27,6 @@ fun run(file_name: Text, scenario_name: Text): Null {
     const output_timestamp = trust $echo {date_now()} | date +%Y-%m-%d_%H-%M-%S$
     echo "Output timestamp: {output_timestamp}"
     const output_folder="{hefe_root}/odin/experiments/data/{scenario_name}-mod-{output_timestamp}"
-    // exit 0
 
     const log_dir="{scenario_root}/logs"
 
@@ -46,15 +45,13 @@ fun run(file_name: Text, scenario_name: Text): Null {
     // Save logfiles
     trust $cp {log_dir}/{scenario_name}* .$
 
-    // TODO:  Make synlink to original scenario
-    // trust $ln -s {input_name} ./{file_name}$
+    // Make synlink to original scenario
     $ln -s {hefe_root}/odin/experiments/testbed/scenarios/{file_name} {file_name}$ failed {
         echo("Could not create symlink to original scenario.")
         exit 1
     }
     trust $mv {file_name} {scenario_name}-orig-{file_name}$
 
-    // output_folder="{hefe_root}/odin/experiments/data/{file_name}"
 
     // Write small readme
     const readme_file_name = "README"
@@ -64,10 +61,6 @@ fun run(file_name: Text, scenario_name: Text): Null {
 }
 
 
-// Struktur på argumenter:
-// 0. (navnet på scriptet, default)
-// 1. Oblig-bokstav. F.x "a" eller "b". Vil teste x-1 og x-2.
-// 2. Path til submissions-folder med data fra Devilry. F.x "../student_submissions/"
 main(args) {
     echo "Hefe auto result storer."
     echo("\tScenario root:" + scenario_root)
