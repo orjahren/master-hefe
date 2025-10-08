@@ -2,28 +2,86 @@
 
 // Assume relevant env vars are set
 import { env_var_load } from "std/env"
+import { date_now } from "std/date"
+
 
 
 
 const scenario_root = env_var_load("SCENARIO_RUNNER_ROOT")
+if scenario_root == "" {
+    echo("SCENARIO_RUNNER_ROOT not set")
+    exit(1)
+}
 const hefe_root = env_var_load("HEFE_ROOT")
-const file_name = "route_obstacles.py"
-const scenario_name = "Accident_1" // Change as needed
-
-const input_name="{scenario_root}/srunner/scenarios/{file_name}"
-const output_folder="{hefe_root}/odin/experiments/data/{scenario_name}-mod-{date()}"
-
-const log_dir="{scenario_root}/logs"
-
-$mkdir -p {output_folder}$ failed {
-    print("Folder already exists or could not be created.")
+if hefe_root == "" {
+    echo("HEFE_ROOT not set")
+    exit(1)
 }
 
-trust $cd {output_folder}$
 
-// Save what code was used
-trust $cp {input_name} {file_name}$
+fun run(file_name: Text, scenario_name: Text): Null {
 
-trust $cp ¥{log_dir}/{scenario_name}* .$
+    echo "Storing run for scenario {scenario_name} with file {file_name}"
 
-output_folder="{hefe_root}/odin/experiments/data/{file_name}"
+    const input_name="{scenario_root}/srunner/scenarios/{file_name}"
+    const output_timestamp = trust $echo {date_now()} | date +%Y-%m-%d_%H-%M-%S$
+    echo "Output timestamp: {output_timestamp}"
+    const output_folder="{hefe_root}/odin/experiments/data/{scenario_name}-mod-{output_timestamp}"
+    // exit 0
+
+    const log_dir="{scenario_root}/logs"
+
+    $mkdir -p {output_folder}$ failed {
+        echo("Folder already exists or could not be created.")
+    }
+
+    trust $cd {output_folder}$
+
+    // Save what code was used
+    trust $cp {input_name} {file_name}$
+
+    // add mod to the file name 
+    trust $mv {file_name} {scenario_name}-mod-{file_name}$
+
+    // Save logfiles
+    trust $cp {log_dir}/{scenario_name}* .$
+
+    // TODO:  Make synlink to original scenario
+    // trust $ln -s {input_name} ./{file_name}$
+    $ln -s {hefe_root}/odin/experiments/testbed/scenarios/{file_name} {file_name}$ failed {
+        echo("Could not create symlink to original scenario.")
+        exit 1
+    }
+    trust $mv {file_name} {scenario_name}-orig-{file_name}$
+
+    // output_folder="{hefe_root}/odin/experiments/data/{file_name}"
+
+    // Write small readme
+    const readme_file_name = "README"
+    trust $echo "This folder contains a saved run of the scenario {file_name} with enhancements from an LLM. \n The scenario was run on {date_now()} and saved to this folder.\n The scenario name used was {scenario_name}.\n The output timestamp is {output_timestamp}." >> {readme_file_name}$
+
+    echo "Saved run to {output_folder}."
+}
+
+
+// Struktur på argumenter:
+// 0. (navnet på scriptet, default)
+// 1. Oblig-bokstav. F.x "a" eller "b". Vil teste x-1 og x-2.
+// 2. Path til submissions-folder med data fra Devilry. F.x "../student_submissions/"
+main(args) {
+    echo "Hefe auto result storer."
+    echo("\tScenario root:" + scenario_root)
+    echo("\tHefe root:" + hefe_root)
+
+    echo args
+
+    const file_name = args[1]
+    const scenario_name = args[2]
+
+    if file_name == "" or scenario_name == "" {
+        echo("Usage: store-test-run.ab <file_name> <scenario_name>")
+        exit 1
+    }
+
+    run(file_name, scenario_name)
+}
