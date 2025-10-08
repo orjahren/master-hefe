@@ -72,7 +72,7 @@ main(args) {
     const scenario_name = args[2]
 
     if file_name == "" or scenario_name == "" {
-        echo("Usage: store-test-run.ab <file_name> <scenario_name>")
+        echo("Usage: amber run store-test-run.ab <file_name> <scenario_name>")
         exit 1
     }
 
