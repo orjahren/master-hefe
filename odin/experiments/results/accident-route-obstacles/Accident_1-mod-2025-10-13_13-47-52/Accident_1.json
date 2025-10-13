@@ -1,0 +1,37 @@
+{
+    "ScenarioTimeoutTest": {
+        "children": [],
+        "feedback_message": "",
+        "blackbox_level": 4,
+        "optional": false,
+        "_terminate_on_failure": false,
+        "test_status": "SUCCESS",
+        "success_value": 0,
+        "acceptable_value": null,
+        "actual_value": 0,
+        "units": "times",
+        "events": [],
+        "_scenario_name": "Accident_1",
+        "terminate_on_failure": false
+    },
+    "CollisionTest": {
+        "children": [],
+        "feedback_message": "",
+        "blackbox_level": 4,
+        "optional": false,
+        "_terminate_on_failure": false,
+        "test_status": "SUCCESS",
+        "success_value": 0,
+        "acceptable_value": null,
+        "actual_value": 0,
+        "units": "times",
+        "events": [],
+        "_other_actor": null,
+        "_other_actor_type": null,
+        "_collision_sensor": null,
+        "_collision_id": null,
+        "_collision_time": null,
+        "_collision_location": null,
+        "terminate_on_failure": false
+    }
+}
