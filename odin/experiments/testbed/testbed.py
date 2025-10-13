@@ -78,7 +78,8 @@ if __name__ == "__main__":
     prompt_name: PromptName = "minimal_changes_specific_metric"
     model_name = "gemini-2.5-flash"
     # scenario_name = "Accident"
-    scenario_name = "follow.py"
+    # scenario_name = "follow.py"
+    scenario_name = "cut_in.py"
 
     metric = "Jerk"
 
