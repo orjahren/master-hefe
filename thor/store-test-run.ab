@@ -26,7 +26,7 @@ fun run(file_name: Text, scenario_name: Text): Null {
     const input_name="{scenario_root}/srunner/scenarios/{file_name}"
     const output_timestamp = trust $echo {date_now()} | date +%Y-%m-%d_%H-%M-%S$
     echo "Output timestamp: {output_timestamp}"
-    const output_folder="{hefe_root}/odin/experiments/data/{scenario_name}-mod-{output_timestamp}"
+    const output_folder="{hefe_root}/odin/experiments/results/{scenario_name}-mod-{output_timestamp}"
 
     const log_dir="{scenario_root}/logs"
 
