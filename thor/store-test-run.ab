@@ -46,6 +46,7 @@ fun run(file_name: Text, scenario_name: Text): Null {
     trust $cp {log_dir}/{scenario_name}* .$
 
     // Make synlink to original scenario
+    // TODO: This path should be relative. We dont want to commit absolute paths to other peoples computers.
     $ln -s {hefe_root}/odin/experiments/testbed/scenarios/{file_name} {file_name}$ failed {
         echo("Could not create symlink to original scenario.")
         exit 1
