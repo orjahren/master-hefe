@@ -1,4 +1,3 @@
-
 # We wish to decrease the driveability of the scenario by enhancing it with more
 # details, increasing its complexity
 
@@ -97,13 +96,48 @@ def name_to_prompt_fn(name: str):
     methods and concepts that are already present in the input scenario, and
     do not introduce any new methods or concepts. The changes should be as
     minimal as possible while still achieving the goal of decreasing driveability.
-    """
+    """,
+        # Minmal changes. Her må vi få noe til å kjøre!!
+        "minimal_changes_specific_metric": lambda python_carla_scenario_raw, specific_metric: f"""
+    1 - Context: You are a tool for decreasing the driveability of scenarios in the driving simulator Carla.
+    2 - Task: Decrease the driveability of the scenario by enhancing it with
+    more details and complexity, using only methods that are part of the
+    official Carla API, version 0.9.15.
+    3 - Input, the Python specification for the scenario: {python_carla_scenario_raw}
+    4 - Reasoning: Think step by step about how to make the scenario more complex and less driveable, considering possible obstacles, traffic, weather, and other factors using only the official Carla API.
+    5 - Output: Only output the enhanced scenario code in Python Carla scenario
+    format, with no additional text or explanation. Make sure to only use
+    methods and concepts that are already present in the input scenario, and
+    do not introduce any new methods or concepts. The changes should be as
+    minimal as possible while still achieving the goal of decreasing
+    driveability.
+    Focus on making the scenario more difficult with respect to the
+    following specific metric: {specific_metric}
+    """,
     }
 
     return prompts[name]
 
 
+# TODO: Lage bedre system for å definere hvilke prompts som trenger hvilke
+# ekstra inputs. Og typing?
+def prompt_takes_specific_metric(prompt_name: str) -> bool:
+    return prompt_name in ["minimal_changes_specific_metric"]
+
+
+# TODO: Lage bedre system for å definere hvilke prompts som trenger hvilke
+# ekstra inputs. Og typing?
+def prompt_takes_scenario_name(prompt_name: str) -> bool:
+    return prompt_name in ["minimal_changes_shared_file"]
+
 # TODO: "Scenario name" er lett å forveksle med "prompt name" eller filnavn på scnearioet. Kanskje bytte navn på en av dem?
-def get_prompt_for_python_scenario_enhancement(python_carla_scenario_raw: str, prompt_name: str, scenario_name: str) -> str:
+
+
+def get_prompt_for_python_scenario_enhancement(python_carla_scenario_raw: str, prompt_name: str, scenario_name: str, specific_metric: str) -> str:
     prompt_fn = name_to_prompt_fn(prompt_name)
-    return prompt_fn(python_carla_scenario_raw, scenario_name)
+    if prompt_takes_scenario_name(prompt_name):
+        return prompt_fn(python_carla_scenario_raw, scenario_name)
+    elif prompt_takes_specific_metric(prompt_name):
+        return prompt_fn(python_carla_scenario_raw, specific_metric)
+    else:
+        return prompt_fn(python_carla_scenario_raw)
