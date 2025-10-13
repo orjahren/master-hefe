@@ -11,9 +11,23 @@ details and complexity, still in Python carla scenario format. ONLY output the
 code, without any additional text or explanation.
 """
 
+from typing import Callable, Literal
 
-def name_to_prompt_fn(name: str):
-    prompts = {
+PromptName = Literal[
+    "basic",
+    "no_explanation",
+    "no_explanation_strict",
+    "cot",
+    "cot_strict_methods_in_file",
+    "cot_strict_carla_api",
+    "minimal_changes",
+    "minimal_changes_shared_file",
+    "minimal_changes_specific_metric",
+]
+
+
+def name_to_prompt_fn(name: PromptName):
+    prompts: dict[PromptName, Callable[[str], str]] = {
         "basic": lambda python_carla_scenario_raw: f"""
     1 - Context: We are working with a driving simulation environment for the Carla simulator.
     2 - Task: Decrease the driveability of the scenario by enhancing it with more details and complexity.
@@ -119,21 +133,19 @@ def name_to_prompt_fn(name: str):
     return prompts[name]
 
 
-# TODO: Lage bedre system for å definere hvilke prompts som trenger hvilke
-# ekstra inputs. Og typing?
-def prompt_takes_specific_metric(prompt_name: str) -> bool:
+# TODO: Lage bedre system for å definere hvilke prompts som trenger hvilke ekstra inputs.
+def prompt_takes_specific_metric(prompt_name: PromptName) -> bool:
     return prompt_name in ["minimal_changes_specific_metric"]
 
 
-# TODO: Lage bedre system for å definere hvilke prompts som trenger hvilke
-# ekstra inputs. Og typing?
-def prompt_takes_scenario_name(prompt_name: str) -> bool:
+# TODO: Lage bedre system for å definere hvilke prompts som trenger hvilke ekstra inputs
+def prompt_takes_scenario_name(prompt_name: PromptName) -> bool:
     return prompt_name in ["minimal_changes_shared_file"]
 
 # TODO: "Scenario name" er lett å forveksle med "prompt name" eller filnavn på scnearioet. Kanskje bytte navn på en av dem?
 
 
-def get_prompt_for_python_scenario_enhancement(python_carla_scenario_raw: str, prompt_name: str, scenario_name: str, specific_metric: str) -> str:
+def get_prompt_for_python_scenario_enhancement(python_carla_scenario_raw: str, prompt_name: PromptName, scenario_name: str, specific_metric: str) -> str:
     prompt_fn = name_to_prompt_fn(prompt_name)
     if prompt_takes_scenario_name(prompt_name):
         return prompt_fn(python_carla_scenario_raw, scenario_name)

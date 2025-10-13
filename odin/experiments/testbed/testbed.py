@@ -4,7 +4,7 @@ import os
 from odin.llm_api_interfaces.gemini import execute_gemini_model
 from odin.llm_api_interfaces.ollama import api_is_up,  execute_ollama_model, get_ollama_models
 from odin.scenario_utils import get_available_scenarios, get_enhanced_scenario_name, save_enhanced_scenario, scenario_path_to_string
-from prompts import get_prompt_for_python_scenario_enhancement
+from prompts import PromptName, get_prompt_for_python_scenario_enhancement
 
 SCENARIO_REPOSITORY_PATH = "odin/experiments/testbed/scenarios"
 
@@ -18,7 +18,7 @@ def model_name_to_function(model_name: str):
         raise ValueError(f"Model {model_name} is not supported.")
 
 
-def enhance_scenario_with_llm(scenario_description: str, model_name: str, prompt_name: str, scenario_name: str, specific_metric: str) -> str:
+def enhance_scenario_with_llm(scenario_description: str, model_name: str, prompt_name: PromptName, scenario_name: str, specific_metric: str) -> str:
     if use_ollama and not api_is_up():
         raise ConnectionError("OLLAMA API is not reachable.")
 
@@ -74,8 +74,8 @@ if __name__ == "__main__":
     # scenario = "follow.py"
     # scenario = "route_obstacles.py"
 
-    prompt_name = "cot_strict_carla_api"
-    prompt_name = "minimal_changes_specific_metric"
+    prompt_name: PromptName = "cot_strict_carla_api"
+    prompt_name: PromptName = "minimal_changes_specific_metric"
     model_name = "gemini-2.5-flash"
     # scenario_name = "Accident"
     scenario_name = "follow.py"
