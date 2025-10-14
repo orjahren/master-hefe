@@ -2,7 +2,7 @@ import os
 
 
 # TODO: Implementer denne
-# TODO: Fastslå hvilket format vi bruker (OpenSCENARIO/CommonRoad/andre)
+# TODO: Fastslaa hvilket format vi bruker (OpenSCENARIO/CommonRoad/andre)
 def file_format_is_valid(file_format: str) -> bool:
     """
     Check if the file format is valid.

@@ -80,7 +80,7 @@ def name_to_prompt_fn(name: PromptName):
     4 - Reasoning: Think step by step about how to make the scenario more complex and less driveable, considering possible obstacles, traffic, weather, and other factors using only the official Carla API.
     5 - Output: Only output the enhanced scenario code in Python Carla scenario format, with no additional text or explanation.
     """,
-        # Minmal changes. Her må vi få noe til å kjøre!!
+        # Minmal changes. Her maa vi faa noe til aa kjore!!
         "minimal_changes": lambda python_carla_scenario_raw: f"""
     1 - Context: You are a tool for decreasing the driveability of scenarios in the driving simulator Carla.
     2 - Task: Decrease the driveability of the scenario by enhancing it with
@@ -111,7 +111,7 @@ def name_to_prompt_fn(name: PromptName):
     do not introduce any new methods or concepts. The changes should be as
     minimal as possible while still achieving the goal of decreasing driveability.
     """,
-        # Minmal changes. Her må vi få noe til å kjøre!!
+        # Minmal changes. Her maa vi faa noe til aa kjore!!
         "minimal_changes_specific_metric": lambda python_carla_scenario_raw, specific_metric: f"""
     1 - Context: You are a tool for decreasing the driveability of scenarios in the driving simulator Carla.
     2 - Task: Decrease the driveability of the scenario by enhancing it with
@@ -154,16 +154,16 @@ def name_to_prompt_fn(name: PromptName):
     return prompts[name]
 
 
-# TODO: Lage bedre system for å definere hvilke prompts som trenger hvilke ekstra inputs.
+# TODO: Lage bedre system for aa definere hvilke prompts som trenger hvilke ekstra inputs.
 def prompt_takes_specific_metric(prompt_name: PromptName) -> bool:
     return prompt_name in ["minimal_changes_specific_metric", "minimal_changes_shared_file_specific_metric"]
 
 
-# TODO: Lage bedre system for å definere hvilke prompts som trenger hvilke ekstra inputs
+# TODO: Lage bedre system for aa definere hvilke prompts som trenger hvilke ekstra inputs
 def prompt_takes_scenario_name(prompt_name: PromptName) -> bool:
     return prompt_name in ["minimal_changes_shared_file_specific_metric"]
 
-# TODO: "Scenario name" er lett å forveksle med "prompt name" eller filnavn på scnearioet. Kanskje bytte navn på en av dem?
+# TODO: "Scenario name" er lett aa forveksle med "prompt name" eller filnavn paa scnearioet. Kanskje bytte navn paa en av dem?
 
 
 def get_prompt_for_python_scenario_enhancement(python_carla_scenario_raw: str, prompt_name: PromptName, scenario_name: str, specific_metric: str) -> str:
