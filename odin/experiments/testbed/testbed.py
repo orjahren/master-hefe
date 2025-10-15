@@ -75,12 +75,17 @@ if __name__ == "__main__":
     # scenario = "route_obstacles.py"
 
     # prompt_name: PromptName = "cot_strict_carla_api"
-    prompt_name: PromptName = "minimal_changes_specific_metric"
+    # prompt_name: PromptName = "minimal_changes_specific_metric"
+
+    # prompt_name: PromptName = "no_explanation"
+    prompt_name: PromptName = "no_explanation_strict"
+
     model_name = "gemini-2.5-flash"
     # scenario_name = "Accident"
     # scenario_name = "follow.py"
     # scenario_name = "cut_in.py"
-    scenario_name = "route_obstacles.py"
+    # scenario_name = "route_obstacles.py"
+    scenario_name = "follow.py"
 
     metric = "Jerk"
 
