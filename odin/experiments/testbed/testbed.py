@@ -78,18 +78,19 @@ if __name__ == "__main__":
     # prompt_name: PromptName = "minimal_changes_specific_metric"
 
     # prompt_name: PromptName = "no_explanation"
-    prompt_name: PromptName = "no_explanation_strict"
+    prompt_name: PromptName = "minimal_changes_shared_file_specific_metric"
 
     model_name = "gemini-2.5-flash"
     # scenario_name = "Accident"
     # scenario_name = "follow.py"
     # scenario_name = "cut_in.py"
     # scenario_name = "route_obstacles.py"
-    scenario_name = "follow.py"
+    scenario_file_name = "route_obstacles.py"
+    scenario_name = "Accident"
 
     metric = "Jerk"
 
-    scenario_path = os.path.join(SCENARIO_REPOSITORY_PATH, scenario_name)
+    scenario_path = os.path.join(SCENARIO_REPOSITORY_PATH, scenario_file_name)
     scenario_description = scenario_path_to_string(scenario_path)
     print("Original scenario description:")
     print(scenario_description[:100])
@@ -98,7 +99,7 @@ if __name__ == "__main__":
         scenario_description, model_name, prompt_name, scenario_name, metric)
 
     output_path = SCENARIO_REPOSITORY_PATH + "/" + get_enhanced_scenario_name(
-        SCENARIO_REPOSITORY_PATH, scenario_name.replace(".py", "")) + ".py"
+        SCENARIO_REPOSITORY_PATH, scenario_file_name.replace(".py", "")) + ".py"
     print(f"Saving enhanced scenario to: {output_path}")
     save_enhanced_scenario(enhanced_scenario, output_path)
 

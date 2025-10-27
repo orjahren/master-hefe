@@ -1,1 +1,0 @@
-/home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/route_obstacles.py
