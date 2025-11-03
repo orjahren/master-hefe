@@ -4,7 +4,7 @@ import sys
 import time
 
 from thor.carla_interface import get_carla_is_up
-from thor.scenario_utils import get_scenario_list, map_enhanced_filename_to_base, print_scenario_repo_stats
+from thor.scenario_utils import get_scenario_list, map_enhanced_filename_to_base, scenario_filename_to_name, execute_scenario_by_scenario_runner
 
 # We start Carla and run various scenarios
 
@@ -65,6 +65,7 @@ def cleanup(carla_pid: int) -> None:
 
 
 def test_name_mapping(base_scenarios: list[str], enhanced_scenarios: list[str], debug: bool) -> None:
+    # Scenario file names:
     for enhanced_scenario in enhanced_scenarios:
         if debug:
             print(
@@ -75,7 +76,22 @@ def test_name_mapping(base_scenarios: list[str], enhanced_scenarios: list[str], 
         if debug:
             print(
                 f"Enhanced scenario {enhanced_scenario} maps to base scenario {mapped_base}")
+
+    # Scenario content names needed for running:
+    for base_scenario in base_scenarios:
+        if debug:
+            print(
+                f"Testing mapping for base scenario: {base_scenario}")
+        # Will throw if it fails
+        output_name = scenario_filename_to_name(
+            base_scenario)
+        if debug:
+            print(
+                f"Base scenario {base_scenario} maps to output name {output_name}")
     return True
+
+
+IGNORED_FILES = ["__init__.py", "common.py", "cut_in.py", "enhanced_cut_in.py"]
 
 
 def scenario_benchmarker():
@@ -84,32 +100,43 @@ def scenario_benchmarker():
     # ... existing benchmarking code ...
 
     hefe_root = get_env_var("HEFE_ROOT")
-    enhanced_scenario_path = f"{hefe_root}/odin/experiments/testbed/scenarios/"
-    enhanced_scenarios = get_scenario_list(enhanced_scenario_path)
+    enhanced_scenario_path = f"{hefe_root}/odin/experiments/testbed/scenarios"
+    enhanced_scenarios = list(filter(
+        lambda x: x not in IGNORED_FILES, get_scenario_list(enhanced_scenario_path)))
     # print_scenario_repo_stats("Enhanced", enhanced_scenario_path)
 
     scenario_runner_root = get_env_var("SCENARIO_RUNNER_ROOT")
     # print(f"Using scenario runner at {scenario_runner_root}")
 
-    base_scenarios = get_scenario_list(
-        scenario_runner_root + "/srunner/scenarios/")
+    base_scenarios = list(filter(lambda x: x not in IGNORED_FILES, get_scenario_list(
+        scenario_runner_root + "/srunner/scenarios")))
     # print_scenario_repo_stats(
     # "Base", scenario_runner_root + "/srunner/scenarios/")
 
     assert test_name_mapping(
         base_scenarios, enhanced_scenarios, False), "Not all scenarios mapped correctly."
-    exit(0)
+    # exit(0)
 
     carla_pid = start_carla()
-    while (True):
+    for enhanced_scenario in enhanced_scenarios:
         if not pid_is_running(carla_pid):
             print("Carla has crashed! Restarting...")
             carla_pid = start_carla()
-        # Run scenario benchmarking steps
-        if (inp := input("Press Enter to run the next scenario...")) == "q":
-            print("Exiting scenario benchmarker.")
-            break
-        print("You said", inp)
+
+        base_scenario = map_enhanced_filename_to_base(
+            enhanced_scenario, base_scenarios)
+        scenario_name = scenario_filename_to_name(base_scenario)
+
+        print(
+            f"Running enhanced scenario {enhanced_scenario} mapped to base scenario {base_scenario}...")
+
+        status = execute_scenario_by_scenario_runner(
+            scenario_runner_root,
+            enhanced_scenario_path + "/" + enhanced_scenario,
+            base_scenario,
+            scenario_name,
+            BENCHMARKER_LOGFILE
+        )
 
     cleanup(carla_pid)
 
