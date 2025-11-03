@@ -2,9 +2,9 @@ import os
 import subprocess
 import sys
 import time
-import socket
 
 from thor.carla_interface import get_carla_is_up
+from thor.scenario_utils import get_scenario_list, map_enhanced_filename_to_base, print_scenario_repo_stats
 
 # We start Carla and run various scenarios
 
@@ -15,7 +15,7 @@ from thor.carla_interface import get_carla_is_up
 def get_env_var(var_name):
     value = os.environ.get(var_name, "")
     if value == "":
-        print(f"{var_name} not set")
+        print(f"Env var {var_name} not set")
         sys.exit(1)
     return value
 
@@ -23,6 +23,7 @@ def get_env_var(var_name):
 BENCHMARKER_LOGFILE = "scenario_benchmarker.log"
 
 
+# Start Carla, wait until its up and return its PID
 def start_carla() -> int:
     carla_root = get_env_var("CARLA_ROOT")
     print("Starting Carla...")
@@ -32,23 +33,17 @@ def start_carla() -> int:
     proc = subprocess.Popen(carla_cmd, shell=True)
     print(f"Carla started with PID {proc.pid}")
 
-    # Wait for Carla to be up (try to connect to localhost:2000)
     print("Waiting for Carla to start...")
-    # TODO: Can refactor this
     for i in range(60):  # Wait up to 60 seconds
-        # TODO: Should probably use carla package
         if get_carla_is_up("localhost"):
             print("Carla started.")
-            break
+            return proc.pid
         else:
             print("Carla not up yet, retrying...")
             time.sleep(1)
-    else:
-        print("Carla did not start within 60 seconds.")
+    print("Carla did not start within 60 seconds.")
 
-        sys.exit(1)
-
-    return proc.pid
+    sys.exit(1)
 
 
 def pid_is_running(pid: int) -> bool:
@@ -69,12 +64,18 @@ def cleanup(carla_pid: int) -> None:
         print(f"Error terminating Carla: {e}")
 
 
-def get_scenario_list(scenario_repository_path: str) -> list:
-    scenario_files = [
-        f for f in os.listdir(scenario_repository_path)
-        if f.endswith(".py")
-    ]
-    return scenario_files
+def test_name_mapping(base_scenarios: list[str], enhanced_scenarios: list[str], debug: bool) -> None:
+    for enhanced_scenario in enhanced_scenarios:
+        if debug:
+            print(
+                f"Testing mapping for enhanced scenario: {enhanced_scenario}")
+        # Will throw if it fails
+        mapped_base = map_enhanced_filename_to_base(
+            enhanced_scenario, base_scenarios)
+        if debug:
+            print(
+                f"Enhanced scenario {enhanced_scenario} maps to base scenario {mapped_base}")
+    return True
 
 
 def scenario_benchmarker():
@@ -84,11 +85,19 @@ def scenario_benchmarker():
 
     hefe_root = get_env_var("HEFE_ROOT")
     enhanced_scenario_path = f"{hefe_root}/odin/experiments/testbed/scenarios/"
-    print(f"Looking for scenarios in {enhanced_scenario_path}")
-    scenarios = get_scenario_list(enhanced_scenario_path)
-    print(f"Found {len(scenarios)} scenarios to benchmark.")
-    for scenario in scenarios:
-        print(f"Scenario: {scenario}")
+    enhanced_scenarios = get_scenario_list(enhanced_scenario_path)
+    # print_scenario_repo_stats("Enhanced", enhanced_scenario_path)
+
+    scenario_runner_root = get_env_var("SCENARIO_RUNNER_ROOT")
+    # print(f"Using scenario runner at {scenario_runner_root}")
+
+    base_scenarios = get_scenario_list(
+        scenario_runner_root + "/srunner/scenarios/")
+    # print_scenario_repo_stats(
+    # "Base", scenario_runner_root + "/srunner/scenarios/")
+
+    assert test_name_mapping(
+        base_scenarios, enhanced_scenarios, False), "Not all scenarios mapped correctly."
     exit(0)
 
     carla_pid = start_carla()
