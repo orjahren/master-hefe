@@ -1,0 +1,124 @@
+Starting scenario benchmarker at time10:53:56
+Running scenario CutInFrom_mine at 10:54:06
+Finished running scenario cut_in-enhanced-2.py at 10:54:11
+
+
+
+Running scenario CutInFrom_mine at 10:54:11
+Finished running scenario cut_in-enhanced-3.py at 10:54:19
+
+
+
+Running scenario CutInFrom_mine at 10:54:19
+Finished running scenario cut_in-enhanced-4.py at 10:54:27
+
+
+
+Running scenario CutInFrom_mine at 10:54:27
+Finished running scenario cut_in-enhanced-5.py at 10:54:35
+
+
+
+Running scenario CutInFrom_mine at 10:54:35
+Finished running scenario cut_in-enhanced-6.py at 10:54:43
+
+
+
+Running scenario CutInFrom_mine at 10:54:43
+Finished running scenario cut_in-enhanced-7.py at 10:54:51
+
+
+
+Running scenario CutInFrom_mine at 10:54:51
+Finished running scenario cut_in-enhanced-8.py at 10:54:59
+
+
+
+Running scenario NoSignalJunctionCrossing at 10:54:59
+Finished running scenario junction.py at 10:55:08
+
+
+
+Running scenario NoSignalJunctionCrossing at 10:55:08
+Finished running scenario junction-enhanced.py at 10:55:17
+
+
+
+Running scenario CutInFrom_mine at 10:55:17
+Finished running scenario cut_in-enhanced-9.py at 10:55:25
+
+
+
+Running scenario NoSignalJunctionCrossing at 10:55:25
+Finished running scenario junction-enhanced-2.py at 10:55:45
+
+
+
+Running scenario FollowLeadingVehicle_1 at 10:55:45
+Finished running scenario follow.py at 10:55:45
+
+
+
+Carla crash detected at 10:55:45
+Running scenario FollowLeadingVehicle_1 at 10:55:55
+Finished running scenario follow-enhanced.py at 10:56:10
+
+
+
+Running scenario FollowLeadingVehicle_1 at 10:56:10
+Finished running scenario follow-enhanced-2.py at 10:56:10
+
+
+
+Carla crash detected at 10:56:10
+Running scenario FollowLeadingVehicle_1 at 10:56:19
+Finished running scenario follow-enhanced-3.py at 10:57:24
+
+
+
+Running scenario Accident_1 at 10:57:24
+Finished running scenario route_obstacles.py at 11:00:33
+
+
+
+Running scenario FollowLeadingVehicle_1 at 11:00:33
+Finished running scenario follow-enhanced-4.py at 11:01:11
+
+
+
+Running scenario Accident_1 at 11:01:11
+Finished running scenario route_obstacles-enhanced.py at 11:01:19
+
+
+
+Running scenario FollowLeadingVehicle_1 at 11:01:19
+Finished running scenario follow-enhanced-5.py at 11:02:00
+
+
+
+Running scenario Accident_1 at 11:02:00
+Finished running scenario route_obstacles-enhanced-2.py at 11:05:08
+
+
+
+Running scenario Accident_1 at 11:05:08
+Finished running scenario route_obstacles-enhanced-3.py at 11:08:16
+
+
+
+Running scenario FollowLeadingVehicle_1 at 11:08:16
+Finished running scenario follow-enhanced-6.py at 11:08:24
+
+
+
+Running scenario FollowLeadingVehicle_1 at 11:08:24
+Finished running scenario follow-enhanced-7.py at 11:08:32
+
+
+
+Running scenario Accident_1 at 11:08:32
+Finished running scenario route_obstacles-enhanced-4.py at 11:08:40
+
+
+
+Scenario benchmarking complete at 11:08:40. 0 out of 24 scenarios ran successfully.

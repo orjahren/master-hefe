@@ -26,7 +26,7 @@ assert get_env_var("SCENARIO_RUNNER_ROOT"), "SCENARIO_RUNNER_ROOT not set"
 assert get_env_var("HEFE_ROOT"), "HEFE_ROOT not set"
 
 # Change to "prod" for production runs. Keep records separate to assert their validity.
-MODE = "dev"
+MODE = "prod"
 
 # Note how we assert this to exist above
 LOG_FOLDER = get_env_var("HEFE_ROOT") + "/thor/scenario-benchmarker/" + MODE
@@ -115,7 +115,7 @@ IGNORED_FILES = ["__init__.py", "common.py", "cut_in.py", "enhanced_cut_in.py"]
 def scenario_benchmarker():
     # Placeholder for the main benchmarking logic
     print("Running scenario benchmarker...")
-    write_to_logfile("Starting scenario benchmarker at time" +
+    write_to_logfile("Starting scenario benchmarker at time " +
                      get_current_time_formatted())
     # ... existing benchmarking code ...
 
