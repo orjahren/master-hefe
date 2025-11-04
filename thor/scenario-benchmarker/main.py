@@ -25,8 +25,11 @@ assert get_env_var("CARLA_ROOT"), "CARLA_ROOT not set"
 assert get_env_var("SCENARIO_RUNNER_ROOT"), "SCENARIO_RUNNER_ROOT not set"
 assert get_env_var("HEFE_ROOT"), "HEFE_ROOT not set"
 
+# Change to "prod" for production runs. Keep records separate to assert their validity.
+MODE = "dev"
+
 # Note how we assert this to exist above
-LOG_FOLDER = get_env_var("HEFE_ROOT") + "/thor/scenario-benchmarker/"
+LOG_FOLDER = get_env_var("HEFE_ROOT") + "/thor/scenario-benchmarker/" + MODE
 
 
 # Start Carla, wait until its up and return its PID
@@ -178,9 +181,12 @@ def scenario_benchmarker():
             LOG_FOLDER
         )
         successful_runs += int(status)
+        write_to_logfile(
+            f"Finished running scenario {enhanced_scenario} at {get_current_time_formatted()}\n\n\n")
 
     cleanup(carla_pid)
 
+    # NOTE: Dette tallet stemmer ikke
     print(
         f"Scenario benchmarking complete. {successful_runs} out of {len(enhanced_scenarios)} scenarios ran successfully.")
     write_to_logfile(
