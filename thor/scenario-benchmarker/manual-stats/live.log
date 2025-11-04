@@ -1,0 +1,362 @@
+Starting scenario benchmarker at time 12:28:32
+nohup: ignoring input
+Starting job to run enhanced scenario cut_in-enhanced-2.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/cut_in-enhanced-2-prepped.py as CutInFrom_mine at 12:28:41
+Traceback (most recent call last):
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 411, in _load_and_run_scenario
+    debug_mode=self._args.debug)
+TypeError: __init__() got an unexpected keyword argument 'world'
+Preparing scenario: CutInFrom_mine
+The scenario cannot be loaded
+__init__() got an unexpected keyword argument 'world'
+No more scenarios .... Exiting
+Finished job spawn for running scenario cut_in-enhanced-2.py at 12:28:46
+
+
+
+Starting job to run enhanced scenario cut_in-enhanced-3.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/cut_in-enhanced-3-prepped.py as CutInFrom_mine at 12:28:46
+Traceback (most recent call last):
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 411, in _load_and_run_scenario
+    debug_mode=self._args.debug)
+TypeError: __init__() got an unexpected keyword argument 'world'
+Preparing scenario: CutInFrom_mine
+The scenario cannot be loaded
+__init__() got an unexpected keyword argument 'world'
+No more scenarios .... Exiting
+Finished job spawn for running scenario cut_in-enhanced-3.py at 12:28:55
+
+
+
+Starting job to run enhanced scenario cut_in-enhanced-4.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/cut_in-enhanced-4-prepped.py as CutInFrom_mine at 12:28:55
+Traceback (most recent call last):
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 411, in _load_and_run_scenario
+    debug_mode=self._args.debug)
+TypeError: __init__() got an unexpected keyword argument 'world'
+Preparing scenario: CutInFrom_mine
+The scenario cannot be loaded
+__init__() got an unexpected keyword argument 'world'
+No more scenarios .... Exiting
+Finished job spawn for running scenario cut_in-enhanced-4.py at 12:29:03
+
+
+
+Starting job to run enhanced scenario cut_in-enhanced-5.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/cut_in-enhanced-5-prepped.py as CutInFrom_mine at 12:29:03
+Traceback (most recent call last):
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 411, in _load_and_run_scenario
+    debug_mode=self._args.debug)
+TypeError: __init__() got an unexpected keyword argument 'world'
+Preparing scenario: CutInFrom_mine
+The scenario cannot be loaded
+__init__() got an unexpected keyword argument 'world'
+No more scenarios .... Exiting
+Finished job spawn for running scenario cut_in-enhanced-5.py at 12:29:11
+
+
+
+Starting job to run enhanced scenario cut_in-enhanced-6.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/cut_in-enhanced-6-prepped.py as CutInFrom_mine at 12:29:11
+Traceback (most recent call last):
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 411, in _load_and_run_scenario
+    debug_mode=self._args.debug)
+TypeError: __init__() got an unexpected keyword argument 'world'
+Preparing scenario: CutInFrom_mine
+The scenario cannot be loaded
+__init__() got an unexpected keyword argument 'world'
+No more scenarios .... Exiting
+Finished job spawn for running scenario cut_in-enhanced-6.py at 12:29:18
+
+
+
+Starting job to run enhanced scenario cut_in-enhanced-7.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/cut_in-enhanced-7-prepped.py as CutInFrom_mine at 12:29:18
+Traceback (most recent call last):
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 411, in _load_and_run_scenario
+    debug_mode=self._args.debug)
+TypeError: __init__() got an unexpected keyword argument 'world'
+Preparing scenario: CutInFrom_mine
+The scenario cannot be loaded
+__init__() got an unexpected keyword argument 'world'
+No more scenarios .... Exiting
+Finished job spawn for running scenario cut_in-enhanced-7.py at 12:29:25
+
+
+
+Starting job to run enhanced scenario cut_in-enhanced-8.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/cut_in-enhanced-8-prepped.py as CutInFrom_mine at 12:29:25
+Traceback (most recent call last):
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 411, in _load_and_run_scenario
+    debug_mode=self._args.debug)
+TypeError: __init__() got an unexpected keyword argument 'world'
+Preparing scenario: CutInFrom_mine
+The scenario cannot be loaded
+__init__() got an unexpected keyword argument 'world'
+No more scenarios .... Exiting
+Finished job spawn for running scenario cut_in-enhanced-8.py at 12:29:32
+
+
+
+Starting job to run enhanced scenario junction.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/junction-prepped.py as NoSignalJunctionCrossing at 12:29:32
+Signal 11 caught.
+Malloc Size=65538 LargeMemoryPoolOffset=65554 
+Malloc Size=131160 LargeMemoryPoolOffset=196744 
+Malloc Size=131160 LargeMemoryPoolOffset=327928 
+4.26.2-0+++UE4+Release-4.26 522 0
+Disabling core dumps.
+CommonUnixCrashHandler: Signal=11
+Engine crash handling finished; re-raising signal 11 for the default handler. Good bye.
+/home/oliverrj/Documents/master-extern/CARLA_0.9.15/CarlaUE4.sh: line 5: 2086301 Segmentation fault      (core dumped) "$UE4_PROJECT_ROOT/CarlaUE4/Binaries/Linux/CarlaUE4-Linux-Shipping" CarlaUE4 "$@"
+terminate called after throwing an instance of 'carla::client::TimeoutException'
+  what():  time-out of 10000ms while waiting for the simulator, make sure the simulator is ready and connected to 127.0.0.1:2000
+Finished job spawn for running scenario junction.py at 12:29:51
+
+
+
+Starting job to run enhanced scenario junction-enhanced.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/junction-enhanced-prepped.py as NoSignalJunctionCrossing at 12:29:51
+Finished job spawn for running scenario junction-enhanced.py at 12:29:51
+
+
+
+Carla crash detected at 12:29:51
+nohup: ignoring input
+Starting job to run enhanced scenario cut_in-enhanced-9.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/cut_in-enhanced-9-prepped.py as CutInFrom_mine at 12:30:00
+Traceback (most recent call last):
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 411, in _load_and_run_scenario
+    debug_mode=self._args.debug)
+TypeError: __init__() got an unexpected keyword argument 'world'
+Preparing scenario: CutInFrom_mine
+The scenario cannot be loaded
+__init__() got an unexpected keyword argument 'world'
+No more scenarios .... Exiting
+Finished job spawn for running scenario cut_in-enhanced-9.py at 12:30:04
+
+
+
+Starting job to run enhanced scenario junction-enhanced-2.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/junction-enhanced-2-prepped.py as NoSignalJunctionCrossing at 12:30:04
+Signal 11 caught.
+Malloc Size=65538 LargeMemoryPoolOffset=65554 
+Malloc Size=131160 LargeMemoryPoolOffset=196744 
+Malloc Size=131160 LargeMemoryPoolOffset=327928 
+4.26.2-0+++UE4+Release-4.26 522 0
+Disabling core dumps.
+CommonUnixCrashHandler: Signal=11
+Engine crash handling finished; re-raising signal 11 for the default handler. Good bye.
+/home/oliverrj/Documents/master-extern/CARLA_0.9.15/CarlaUE4.sh: line 5: 2088301 Segmentation fault      (core dumped) "$UE4_PROJECT_ROOT/CarlaUE4/Binaries/Linux/CarlaUE4-Linux-Shipping" CarlaUE4 "$@"
+terminate called after throwing an instance of 'carla::client::TimeoutException'
+  what():  time-out of 10000ms while waiting for the simulator, make sure the simulator is ready and connected to 127.0.0.1:2000
+Finished job spawn for running scenario junction-enhanced-2.py at 12:30:24
+
+
+
+Starting job to run enhanced scenario follow.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/follow-prepped.py as FollowLeadingVehicle_1 at 12:30:24
+Finished job spawn for running scenario follow.py at 12:30:24
+
+
+
+Carla crash detected at 12:30:24
+nohup: ignoring input
+Starting job to run enhanced scenario follow-enhanced.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/follow-enhanced-prepped.py as FollowLeadingVehicle_1 at 12:30:33
+Signal 11 caught.
+Malloc Size=65538 LargeMemoryPoolOffset=65554 
+Malloc Size=131160 LargeMemoryPoolOffset=196744 
+Malloc Size=131160 LargeMemoryPoolOffset=327928 
+4.26.2-0+++UE4+Release-4.26 522 0
+Disabling core dumps.
+CommonUnixCrashHandler: Signal=11
+Engine crash handling finished; re-raising signal 11 for the default handler. Good bye.
+/home/oliverrj/Documents/master-extern/CARLA_0.9.15/CarlaUE4.sh: line 5: 2089107 Segmentation fault      (core dumped) "$UE4_PROJECT_ROOT/CarlaUE4/Binaries/Linux/CarlaUE4-Linux-Shipping" CarlaUE4 "$@"
+terminate called after throwing an instance of 'carla::client::TimeoutException'
+  what():  time-out of 10000ms while waiting for the simulator, make sure the simulator is ready and connected to 127.0.0.1:2000
+Finished job spawn for running scenario follow-enhanced.py at 12:30:48
+
+
+
+Starting job to run enhanced scenario follow-enhanced-2.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/follow-enhanced-2-prepped.py as FollowLeadingVehicle_1 at 12:30:48
+Finished job spawn for running scenario follow-enhanced-2.py at 12:30:48
+
+
+
+Carla crash detected at 12:30:48
+nohup: ignoring input
+Starting job to run enhanced scenario follow-enhanced-3.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/follow-enhanced-3-prepped.py as FollowLeadingVehicle_1 at 12:30:57
+Preparing scenario: FollowLeadingVehicle_1
+**** Recording to logs
+**** Recorder file name : /logs/FollowLeadingVehicle_1.log
+Starting recorder
+Loading scenario.
+Running scenario.
+ScenarioManager: Running scenario FollowVehicle
+Not all scenario tests were successful
+Please run with --output for further information
+No more scenarios .... Exiting
+Finished job spawn for running scenario follow-enhanced-3.py at 12:32:01
+
+
+
+Starting job to run enhanced scenario route_obstacles.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/route_obstacles-prepped.py as Accident_1 at 12:32:01
+Preparing scenario: Accident_1
+**** Recording to logs
+**** Recorder file name : /logs/Accident_1.log
+Starting recorder
+Loading scenario.
+Running scenario.
+ScenarioManager: Running scenario Accident
+Not all scenario tests were successful
+Please run with --output for further information
+No more scenarios .... Exiting
+Finished job spawn for running scenario route_obstacles.py at 12:35:09
+
+
+
+Starting job to run enhanced scenario follow-enhanced-4.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/follow-enhanced-4-prepped.py as FollowLeadingVehicle_1 at 12:35:09
+Preparing scenario: FollowLeadingVehicle_1
+**** Recording to logs
+**** Recorder file name : /logs/FollowLeadingVehicle_1.log
+Starting recorder
+Loading scenario.
+Running scenario.
+ScenarioManager: Running scenario FollowVehicle
+All scenario tests were passed successfully!
+No more scenarios .... Exiting
+Finished job spawn for running scenario follow-enhanced-4.py at 12:35:46
+
+
+
+Starting job to run enhanced scenario route_obstacles-enhanced.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/route_obstacles-enhanced-prepped.py as Accident_1 at 12:35:46
+Traceback (most recent call last):
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 411, in _load_and_run_scenario
+    debug_mode=self._args.debug)
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenarios/route_obstacles.py", line 108, in __init__
+    "Accident", ego_vehicles, config, world, randomize, debug_mode, criteria_enable=criteria_enable)
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenarios/basic_scenario.py", line 64, in __init__
+    self._initialize_actors(config)
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenarios/route_obstacles.py", line 237, in _initialize_actors
+    raise ValueError(f"Couldn't spawn cone {i}")
+ValueError: Couldn't spawn cone 0
+Preparing scenario: Accident_1
+WARNING: Actor model static.prop.construction.trafficcone01 not available. Using instead vehicle.tesla.model3
+WARNING: Cannot spawn actor static.prop.construction.trafficcone01 at position Location(x=128.803055, y=-360.012817, z=0.100000)
+The scenario cannot be loaded
+Couldn't spawn cone 0
+No more scenarios .... Exiting
+Finished job spawn for running scenario route_obstacles-enhanced.py at 12:35:54
+
+
+
+Starting job to run enhanced scenario follow-enhanced-5.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/follow-enhanced-5-prepped.py as FollowLeadingVehicle_1 at 12:35:54
+Preparing scenario: FollowLeadingVehicle_1
+**** Recording to logs
+**** Recorder file name : /logs/FollowLeadingVehicle_1.log
+Starting recorder
+Loading scenario.
+Running scenario.
+ScenarioManager: Running scenario FollowVehicle
+All scenario tests were passed successfully!
+No more scenarios .... Exiting
+Finished job spawn for running scenario follow-enhanced-5.py at 12:36:31
+
+
+
+Starting job to run enhanced scenario route_obstacles-enhanced-2.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/route_obstacles-enhanced-2-prepped.py as Accident_1 at 12:36:31
+Preparing scenario: Accident_1
+**** Recording to logs
+**** Recorder file name : /logs/Accident_1.log
+Starting recorder
+Loading scenario.
+Running scenario.
+ScenarioManager: Running scenario Accident
+Not all scenario tests were successful
+Please run with --output for further information
+No more scenarios .... Exiting
+Finished job spawn for running scenario route_obstacles-enhanced-2.py at 12:39:38
+
+
+
+Starting job to run enhanced scenario route_obstacles-enhanced-3.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/route_obstacles-enhanced-3-prepped.py as Accident_1 at 12:39:38
+Preparing scenario: Accident_1
+**** Recording to logs
+**** Recorder file name : /logs/Accident_1.log
+Starting recorder
+Loading scenario.
+Running scenario.
+ScenarioManager: Running scenario Accident
+Not all scenario tests were successful
+Please run with --output for further information
+No more scenarios .... Exiting
+Finished job spawn for running scenario route_obstacles-enhanced-3.py at 12:42:45
+
+
+
+Starting job to run enhanced scenario follow-enhanced-6.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/follow-enhanced-6-prepped.py as FollowLeadingVehicle_1 at 12:42:45
+Traceback (most recent call last):
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 406, in _load_and_run_scenario
+    scenario_class = self._get_scenario_class_or_fail(config.type)
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 157, in _get_scenario_class_or_fail
+    scenario_module = importlib.import_module(module_name)
+  File "/usr/local/lib/python3.7/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenarios/follow_leading_vehicle.py", line 26, in <module>
+    from srunner.scenariomanager.scenarioatomics.atomic_behaviors import (ActorTransformSetter,
+ImportError: cannot import name 'PedestrianWalk' from 'srunner.scenariomanager.scenarioatomics.atomic_behaviors' (/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenariomanager/scenarioatomics/atomic_behaviors.py)
+Preparing scenario: FollowLeadingVehicle_1
+The scenario cannot be loaded
+cannot import name 'PedestrianWalk' from 'srunner.scenariomanager.scenarioatomics.atomic_behaviors' (/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenariomanager/scenarioatomics/atomic_behaviors.py)
+No more scenarios .... Exiting
+Finished job spawn for running scenario follow-enhanced-6.py at 12:42:52
+
+
+
+Starting job to run enhanced scenario follow-enhanced-7.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/follow-enhanced-7-prepped.py as FollowLeadingVehicle_1 at 12:42:52
+Traceback (most recent call last):
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 406, in _load_and_run_scenario
+    scenario_class = self._get_scenario_class_or_fail(config.type)
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 157, in _get_scenario_class_or_fail
+    scenario_module = importlib.import_module(module_name)
+  File "/usr/local/lib/python3.7/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenarios/follow_leading_vehicle.py", line 31, in <module>
+    from srunner.scenariomanager.scenarioatomics.atomic_behaviors import (ActorTransformSetter,
+ImportError: cannot import name 'WalkToLocation' from 'srunner.scenariomanager.scenarioatomics.atomic_behaviors' (/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenariomanager/scenarioatomics/atomic_behaviors.py)
+Preparing scenario: FollowLeadingVehicle_1
+The scenario cannot be loaded
+cannot import name 'WalkToLocation' from 'srunner.scenariomanager.scenarioatomics.atomic_behaviors' (/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenariomanager/scenarioatomics/atomic_behaviors.py)
+No more scenarios .... Exiting
+Finished job spawn for running scenario follow-enhanced-7.py at 12:42:59
+
+
+
+Starting job to run enhanced scenario route_obstacles-enhanced-4.py mapped to prepped scenario /home/oliverrj/Documents/master-hefe/odin/experiments/testbed/scenarios/route_obstacles-enhanced-4-prepped.py as Accident_1 at 12:42:59
+Traceback (most recent call last):
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 406, in _load_and_run_scenario
+    scenario_class = self._get_scenario_class_or_fail(config.type)
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 157, in _get_scenario_class_or_fail
+    scenario_module = importlib.import_module(module_name)
+  File "/usr/local/lib/python3.7/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenarios/follow_leading_vehicle.py", line 31, in <module>
+    from srunner.scenariomanager.scenarioatomics.atomic_behaviors import (ActorTransformSetter,
+ImportError: cannot import name 'WalkToLocation' from 'srunner.scenariomanager.scenarioatomics.atomic_behaviors' (/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenariomanager/scenarioatomics/atomic_behaviors.py)
+Preparing scenario: Accident_1
+The scenario cannot be loaded
+cannot import name 'WalkToLocation' from 'srunner.scenariomanager.scenarioatomics.atomic_behaviors' (/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenariomanager/scenarioatomics/atomic_behaviors.py)
+No more scenarios .... Exiting
+Finished job spawn for running scenario route_obstacles-enhanced-4.py at 12:43:06
+
+
+
+Scenario benchmarking complete at 12:43:06. 0 out of 24 scenarios ran successfully.
+4.26.2-0+++UE4+Release-4.26 522 0
+Disabling core dumps.
