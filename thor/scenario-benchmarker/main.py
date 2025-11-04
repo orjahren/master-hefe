@@ -30,6 +30,7 @@ MODE = "prod"
 
 # Note how we assert this to exist above
 LOG_FOLDER = get_env_var("HEFE_ROOT") + "/thor/scenario-benchmarker/" + MODE
+LOG_FILE = f"{LOG_FOLDER}/consolidated.log"
 
 
 # Start Carla, wait until its up and return its PID
@@ -38,7 +39,7 @@ def start_carla() -> int:
     print("Starting Carla...")
 
     # Start Carla in the background and get its PID
-    carla_cmd = f"nohup {carla_root}/CarlaUE4.sh >> {LOG_FOLDER}/carla.log 2>&1"
+    carla_cmd = f"nohup {carla_root}/CarlaUE4.sh >> {LOG_FILE} 2>&1"
     proc = subprocess.Popen(carla_cmd, shell=True)
     print(f"Carla started with PID {proc.pid}")
 
@@ -74,7 +75,7 @@ def cleanup(carla_pid: int) -> None:
 
 
 def write_to_logfile(message: str) -> None:
-    with open(LOG_FOLDER + "/experiments.log", "a") as f:
+    with open(LOG_FILE, "a") as f:
         f.write(message + "\n")
 
 
@@ -168,9 +169,9 @@ def scenario_benchmarker():
             enhanced_scenario_path + "/" + enhanced_scenario, enhanced_scenario_path + "/" + enhanced_scenario.replace(".py", "-prepped.py"))
 
         print(
-            f"Running enhanced scenario {enhanced_scenario} mapped to prepped scenario {prepped_scenario} and base scenario {base_scenario}...")
+            f"Starting job to run enhanced scenario {enhanced_scenario} mapped to prepped scenario {prepped_scenario} and base scenario {base_scenario}...")
         write_to_logfile(
-            f"Running scenario {scenario_name} at {get_current_time_formatted()}")
+            f"Starting job to run enhanced scenario {enhanced_scenario} mapped to prepped scenario {prepped_scenario} as {scenario_name} at {get_current_time_formatted()}")
 
         status = execute_scenario_by_scenario_runner(
             carla_pid,
@@ -178,11 +179,11 @@ def scenario_benchmarker():
             prepped_scenario,
             base_scenario,
             scenario_name,
-            LOG_FOLDER
+            LOG_FILE
         )
         successful_runs += int(status)
         write_to_logfile(
-            f"Finished running scenario {enhanced_scenario} at {get_current_time_formatted()}\n\n\n")
+            f"Finished job spawn for running scenario {enhanced_scenario} at {get_current_time_formatted()}\n\n\n")
 
     cleanup(carla_pid)
 

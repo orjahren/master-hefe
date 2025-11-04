@@ -77,7 +77,7 @@ def kill_pid(pid: int) -> bool:
 # Returns true if execution probably was successful
 
 
-def execute_scenario_by_scenario_runner(carla_pid: int, scenario_runner_root: str, enhanced_scenario_path: str, base_scenario_filename: str, scenario_name: str, log_folder: str) -> bool:
+def execute_scenario_by_scenario_runner(carla_pid: int, scenario_runner_root: str, enhanced_scenario_path: str, base_scenario_filename: str, scenario_name: str, log_file: str) -> bool:
 
     # Copy enhanced scenario to scenario runner scenarios folder
     subprocess.run(
@@ -87,7 +87,7 @@ def execute_scenario_by_scenario_runner(carla_pid: int, scenario_runner_root: st
     )
 
     # Start scenario runner
-    command = f"python3.7 {scenario_runner_root}/scenario_runner.py --scenario {scenario_name} --reloadWorld --record logs >> {log_folder}/scenario_runner.log 2>&1"
+    command = f"python3.7 {scenario_runner_root}/scenario_runner.py --scenario {scenario_name} --reloadWorld --record logs >> {log_file} 2>&1"
     scenario_proc = subprocess.Popen(
         command, shell=True,
         stdout=subprocess.PIPE,
@@ -96,7 +96,7 @@ def execute_scenario_by_scenario_runner(carla_pid: int, scenario_runner_root: st
         cwd=scenario_runner_root  # Set working directory
     )
 
-    ego_command = f"python3.10 {scenario_runner_root}/manual_control.py -a >> {log_folder}/ego_agent.log 2>&1"
+    ego_command = f"python3.10 {scenario_runner_root}/manual_control.py -a > /dev/null 2>&1"
     ego_proc = subprocess.Popen(
         ego_command, shell=True, cwd=scenario_runner_root)
 
