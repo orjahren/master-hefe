@@ -4,7 +4,7 @@ import sys
 import time
 
 from thor.carla_interface import get_carla_is_up
-from thor.scenario_utils import get_scenario_list, map_enhanced_filename_to_base, scenario_filename_to_name, execute_scenario_by_scenario_runner
+from thor.scenario_utils import get_scenario_list, map_enhanced_filename_to_base, remove_first_and_last_lines, scenario_filename_to_name, execute_scenario_by_scenario_runner
 
 # We start Carla and run various scenarios
 
@@ -20,7 +20,13 @@ def get_env_var(var_name):
     return value
 
 
-BENCHMARKER_LOGFILE = "scenario_benchmarker.log"
+# You won't get far without these...
+assert get_env_var("CARLA_ROOT"), "CARLA_ROOT not set"
+assert get_env_var("SCENARIO_RUNNER_ROOT"), "SCENARIO_RUNNER_ROOT not set"
+assert get_env_var("HEFE_ROOT"), "HEFE_ROOT not set"
+
+# Note how we assert this to exist above
+LOG_FOLDER = get_env_var("HEFE_ROOT") + "/thor/scenario-benchmarker/"
 
 
 # Start Carla, wait until its up and return its PID
@@ -29,7 +35,7 @@ def start_carla() -> int:
     print("Starting Carla...")
 
     # Start Carla in the background and get its PID
-    carla_cmd = f"nohup {carla_root}/CarlaUE4.sh > {BENCHMARKER_LOGFILE} 2>&1"
+    carla_cmd = f"nohup {carla_root}/CarlaUE4.sh >> {LOG_FOLDER}/carla.log 2>&1"
     proc = subprocess.Popen(carla_cmd, shell=True)
     print(f"Carla started with PID {proc.pid}")
 
@@ -64,6 +70,11 @@ def cleanup(carla_pid: int) -> None:
         print(f"Error terminating Carla: {e}")
 
 
+def write_to_logfile(message: str) -> None:
+    with open(LOG_FOLDER + "/experiments.log", "a") as f:
+        f.write(message + "\n")
+
+
 def test_name_mapping(base_scenarios: list[str], enhanced_scenarios: list[str], debug: bool) -> None:
     # Scenario file names:
     for enhanced_scenario in enhanced_scenarios:
@@ -75,7 +86,7 @@ def test_name_mapping(base_scenarios: list[str], enhanced_scenarios: list[str], 
             enhanced_scenario, base_scenarios)
         if debug:
             print(
-                f"Enhanced scenario {enhanced_scenario} maps to base scenario {mapped_base}")
+                f"\tEnhanced scenario {enhanced_scenario} maps to base scenario {mapped_base}")
 
     # Scenario content names needed for running:
     for base_scenario in base_scenarios:
@@ -87,8 +98,12 @@ def test_name_mapping(base_scenarios: list[str], enhanced_scenarios: list[str], 
             base_scenario)
         if debug:
             print(
-                f"Base scenario {base_scenario} maps to output name {output_name}")
+                f"\tBase scenario {base_scenario} maps to output name {output_name}")
     return True
+
+
+def get_current_time_formatted() -> str:
+    return time.strftime("%H:%M:%S", time.gmtime(time.time()))
 
 
 IGNORED_FILES = ["__init__.py", "common.py", "cut_in.py", "enhanced_cut_in.py"]
@@ -97,12 +112,16 @@ IGNORED_FILES = ["__init__.py", "common.py", "cut_in.py", "enhanced_cut_in.py"]
 def scenario_benchmarker():
     # Placeholder for the main benchmarking logic
     print("Running scenario benchmarker...")
+    write_to_logfile("Starting scenario benchmarker at time" +
+                     get_current_time_formatted())
     # ... existing benchmarking code ...
+
+    successful_runs = 0
 
     hefe_root = get_env_var("HEFE_ROOT")
     enhanced_scenario_path = f"{hefe_root}/odin/experiments/testbed/scenarios"
     enhanced_scenarios = list(filter(
-        lambda x: x not in IGNORED_FILES, get_scenario_list(enhanced_scenario_path)))
+        lambda x: x not in IGNORED_FILES and not "prepped" in x, get_scenario_list(enhanced_scenario_path)))
     # print_scenario_repo_stats("Enhanced", enhanced_scenario_path)
 
     scenario_runner_root = get_env_var("SCENARIO_RUNNER_ROOT")
@@ -113,32 +132,59 @@ def scenario_benchmarker():
     # print_scenario_repo_stats(
     # "Base", scenario_runner_root + "/srunner/scenarios/")
 
+    # Precompute prepped names to test them before running
+    prepped_mappings = [
+        map_enhanced_filename_to_base(
+            remove_first_and_last_lines(
+                enhanced_scenario_path + "/" + es,
+                enhanced_scenario_path + "/" + es.replace(".py", "-prepped.py")
+            ),
+            base_scenarios
+        )
+        for es in enhanced_scenarios if es not in IGNORED_FILES and not "prepped" in es
+    ]
+
     assert test_name_mapping(
-        base_scenarios, enhanced_scenarios, False), "Not all scenarios mapped correctly."
+        base_scenarios, enhanced_scenarios + prepped_mappings, False), "Not all scenarios mapped correctly."
     # exit(0)
 
     carla_pid = start_carla()
     for enhanced_scenario in enhanced_scenarios:
         if not pid_is_running(carla_pid):
             print("Carla has crashed! Restarting...")
+            write_to_logfile("Carla crash detected at " +
+                             get_current_time_formatted())
             carla_pid = start_carla()
 
         base_scenario = map_enhanced_filename_to_base(
             enhanced_scenario, base_scenarios)
         scenario_name = scenario_filename_to_name(base_scenario)
 
+        # Prep by removing first and last lines containing md ticks
+        prepped_scenario = remove_first_and_last_lines(
+            enhanced_scenario_path + "/" + enhanced_scenario, enhanced_scenario_path + "/" + enhanced_scenario.replace(".py", "-prepped.py"))
+
         print(
-            f"Running enhanced scenario {enhanced_scenario} mapped to base scenario {base_scenario}...")
+            f"Running enhanced scenario {enhanced_scenario} mapped to prepped scenario {prepped_scenario} and base scenario {base_scenario}...")
+        write_to_logfile(
+            f"Running scenario {scenario_name} at {get_current_time_formatted()}")
 
         status = execute_scenario_by_scenario_runner(
+            carla_pid,
             scenario_runner_root,
-            enhanced_scenario_path + "/" + enhanced_scenario,
+            prepped_scenario,
             base_scenario,
             scenario_name,
-            BENCHMARKER_LOGFILE
+            LOG_FOLDER
         )
+        successful_runs += int(status)
 
     cleanup(carla_pid)
+
+    print(
+        f"Scenario benchmarking complete. {successful_runs} out of {len(enhanced_scenarios)} scenarios ran successfully.")
+    write_to_logfile(
+        f"Scenario benchmarking complete at {get_current_time_formatted()}. {successful_runs} out of {len(enhanced_scenarios)} scenarios ran successfully.")
 
 
 if __name__ == "__main__":

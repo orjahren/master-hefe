@@ -31,6 +31,9 @@ def map_enhanced_filename_to_base(enhanced_filename: str, base_file_names: list[
         "enhanced_cut_in.py": "cut_in.py",
         "junction": "no_signal_junction_crossing.py",
         "cut_in": "cut_in.py",
+        "follow": "follow_leading_vehicle.py",
+        "route_obstacles": "route_obstacles.py",
+
     }
     for key in manual_overrides:
         if debug:
@@ -54,8 +57,27 @@ def map_enhanced_filename_to_base(enhanced_filename: str, base_file_names: list[
         f"Could not map enhanced filename {enhanced_filename} to any base scenario.")
 
 
+def pid_is_running(pid: int) -> bool:
+    try:
+        os.kill(pid, 0)
+    except OSError:
+        return False
+    else:
+        return True
+
+
+def kill_pid(pid: int) -> bool:
+    try:
+        os.kill(pid, 15)  # Send SIGTERM
+    except OSError:
+        return False
+    else:
+        return True
+
 # Returns true if execution probably was successful
-def execute_scenario_by_scenario_runner(scenario_runner_root: str, enhanced_scenario_path: str, base_scenario_filename: str, scenario_name: str, output_file: str) -> bool:
+
+
+def execute_scenario_by_scenario_runner(carla_pid: int, scenario_runner_root: str, enhanced_scenario_path: str, base_scenario_filename: str, scenario_name: str, log_folder: str) -> bool:
 
     # Copy enhanced scenario to scenario runner scenarios folder
     subprocess.run(
@@ -65,7 +87,7 @@ def execute_scenario_by_scenario_runner(scenario_runner_root: str, enhanced_scen
     )
 
     # Start scenario runner
-    command = f"python3.7 {scenario_runner_root}/scenario_runner.py --scenario {scenario_name} --reloadWorld --record logs >> {output_file} 2>&1"
+    command = f"python3.7 {scenario_runner_root}/scenario_runner.py --scenario {scenario_name} --reloadWorld --record logs >> {log_folder}/scenario_runner.log 2>&1"
     scenario_proc = subprocess.Popen(
         command, shell=True,
         stdout=subprocess.PIPE,
@@ -74,17 +96,27 @@ def execute_scenario_by_scenario_runner(scenario_runner_root: str, enhanced_scen
         cwd=scenario_runner_root  # Set working directory
     )
 
-    ego_command = f"python3.10 {scenario_runner_root}/manual_control.py -a"
+    ego_command = f"python3.10 {scenario_runner_root}/manual_control.py -a >> {log_folder}/ego_agent.log 2>&1"
     ego_proc = subprocess.Popen(
         ego_command, shell=True, cwd=scenario_runner_root)
 
-    # Periodically check if scenario runner (Carla) is live
+    # Periodically check if scenario runner and Carla are alive
     try:
         while True:
             # If Carla has crashed/exited, poll() will not be None
             if scenario_proc.poll() is not None:
                 print("Carla scenario runner is no longer live; exiting.")
-                ego_proc.terminate()
+                # ego_proc.terminate()
+                ego_proc.kill()
+                # Wait for both subprocesses to finish
+                scenario_proc.wait()
+                ego_proc.wait()
+                return False
+
+            if not pid_is_running(carla_pid):
+                print("Carla simulator is no longer live; exiting.")
+                scenario_proc.terminate()
+                ego_proc.kill()
                 # Wait for both subprocesses to finish
                 scenario_proc.wait()
                 ego_proc.wait()
@@ -97,6 +129,7 @@ def execute_scenario_by_scenario_runner(scenario_runner_root: str, enhanced_scen
         print(f"Exception occurred: {e}")
         ego_proc.terminate()
         scenario_proc.terminate()
+        kill_pid(carla_pid)
         # Wait for both to finish
         scenario_proc.wait()
         ego_proc.wait()
@@ -160,3 +193,18 @@ def scenario_filename_to_name(scenario_filename: str) -> str:
         raise ValueError(
             f"Could not map scenario filename {scenario_filename} to scenario NAME.")
     return res
+
+
+def remove_first_and_last_lines(input_path: str, output_path: str) -> str:
+    with open(input_path, 'r') as file:
+        lines = file.readlines()
+
+    # Remove first and last lines (assumed to contain markdown ticks)
+    if len(lines) > 2:
+        lines = lines[1:-2]  # -2 to account for newline at end of file
+    else:
+        lines = []
+
+    with open(output_path, 'w') as file:
+        file.writelines(lines)
+    return output_path
