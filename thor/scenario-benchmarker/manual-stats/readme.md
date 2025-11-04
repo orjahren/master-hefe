@@ -22,13 +22,31 @@ Method:
 - CE-8
 - CE-9
 
+Sum: 8
+
 ### Hard Carla crash
 
 - junction
 - junction-E
 - junction-E2
 
+Sum: 3
+
 (Sikkert pga problemer med scenario runner)
+
+### Illegal object spawn
+
+- route-obstacles-E
+
+Sum: 1
+
+### Illegal imports
+
+- Follow-e-6
+- Follow-e-7
+- route-obstacles-E-4
+
+Sum: 3
 
 ### Funker fint
 
@@ -42,16 +60,21 @@ Method:
 - route-obstacles-E-2
 - route-obstacles-E-3
 
-### Illegal object spawn
-
-- route-obstacles-E
-
-### Illegal imports
-
-- Follow-e-6
-- Follow-e-7
-- route-obstacles-E-4
+Sum: 9
 
 ---
 
 Totally 24 enhanced scenarios.
+
+### Bases
+
+- Route obstacles
+- Follow vehicle
+- Junction
+- CutIn
+
+Tot 4 bases
+
+### Failure ratio
+
+$(24-9)/24=63\%$
