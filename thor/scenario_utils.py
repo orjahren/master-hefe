@@ -201,7 +201,7 @@ def remove_first_and_last_lines(input_path: str, output_path: str) -> str:
 
     # Remove first and last lines (assumed to contain markdown ticks)
     if len(lines) > 2:
-        lines = lines[1:-2]  # -2 to account for newline at end of file
+        lines = lines[1:-1]
     else:
         lines = []
 

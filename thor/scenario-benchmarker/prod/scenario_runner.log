@@ -54,45 +54,8 @@ Preparing scenario: CutInFrom_mine
 The scenario cannot be loaded
 __init__() got an unexpected keyword argument 'world'
 No more scenarios .... Exiting
-Traceback (most recent call last):
-  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 406, in _load_and_run_scenario
-    scenario_class = self._get_scenario_class_or_fail(config.type)
-  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 157, in _get_scenario_class_or_fail
-    scenario_module = importlib.import_module(module_name)
-  File "/usr/local/lib/python3.7/importlib/__init__.py", line 127, in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
-  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
-  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
-  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
-  File "<frozen importlib._bootstrap_external>", line 724, in exec_module
-  File "<frozen importlib._bootstrap_external>", line 860, in get_code
-  File "<frozen importlib._bootstrap_external>", line 791, in source_to_code
-  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
-  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenarios/no_signal_junction_crossing.py", line 209
-    """
-        Remove all actors and traffic lights upon deletion
-       
-                                                         ^
-SyntaxError: EOF while scanning triple-quoted string literal
-Preparing scenario: NoSignalJunctionCrossing
-The scenario cannot be loaded
-EOF while scanning triple-quoted string literal (no_signal_junction_crossing.py, line 209)
-No more scenarios .... Exiting
-Traceback (most recent call last):
-  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 411, in _load_and_run_scenario
-    debug_mode=self._args.debug)
-  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenarios/no_signal_junction_crossing.py", line 72, in __init__
-    criteria_enable=criteria_enable)
-  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenarios/basic_scenario.py", line 64, in __init__
-    self._initialize_actors(config)
-  File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/srunner/scenarios/no_signal_junction_crossing.py", line 120, in _initialize_actors
-    second_vehicle_blueprint = CarlaDataProvider.get_blueprint_library().find('vehicle.audi.tt') # Default blueprint
-AttributeError: type object 'CarlaDataProvider' has no attribute 'get_blueprint_library'
-Preparing scenario: NoSignalJunctionCrossing
-The scenario cannot be loaded
-type object 'CarlaDataProvider' has no attribute 'get_blueprint_library'
-No more scenarios .... Exiting
+terminate called after throwing an instance of 'carla::client::TimeoutException'
+  what():  time-out of 10000ms while waiting for the simulator, make sure the simulator is ready and connected to 127.0.0.1:2000
 Traceback (most recent call last):
   File "/home/oliverrj/Documents/master-extern/scenario_runner-0.9.15/scenario_runner.py", line 411, in _load_and_run_scenario
     debug_mode=self._args.debug)
